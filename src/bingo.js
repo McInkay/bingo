@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const entries = Array(25).fill("test");
-
 const BingoCard = styled.div`
     width: 100%;
     height: 100%;
@@ -17,7 +15,10 @@ const Wrapper = styled.div`
     height: 100%;
 `;
 
-function Bingo() {
+function Bingo(props) {
+    console.log(props);
+    const entries = props.args.slice(0, 25);
+    entries.splice(12, 1,  "Free space");
     return (
         <Wrapper>
             <BingoCard>

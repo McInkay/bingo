@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Bingo from './bingo';
 import styled from 'styled-components';
@@ -20,11 +20,16 @@ const Args = styled.textarea`
 `;
 
 function App() {
+  const [args, setArgs] = useState("");
+  const randomiseArgs = (argsToRandomise) => {
+    return argsToRandomise.split("\n").sort(() => Math.random() - 0.5); 
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <BingoWrapper><Bingo></Bingo></BingoWrapper>
-        <ArgsWrapper><Args></Args></ArgsWrapper>
+        <BingoWrapper><Bingo args={randomiseArgs(args)}></Bingo></BingoWrapper>
+        <ArgsWrapper><Args value={args} onChange={(event) => setArgs(event.target.value)} placeholder="Enter newline separated values" ></Args></ArgsWrapper>
       </header>
     </div>
   );
