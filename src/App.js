@@ -6,18 +6,18 @@ import styled from 'styled-components';
 const BingoWrapper = styled.div`
   width: 50vw;
   height: 50vw;
-  padding: 10vw;
+  padding: 25px;
 `;
 
 const ArgsWrapper = styled.div`
-  width: 48vw;
-  height: 48vw;
+  width: 50vw;
+  height: 50vw;
+  padding: 25px;
 `;
 
 const Args = styled.textarea`
-  width: 80%;
-  height: 80%;
-  margin: 0 10%;
+  width: 100%;
+  height: 100%;
 `;
 
 const randomiseArgs = (argsToRandomise) => {
@@ -27,14 +27,18 @@ const randomiseArgs = (argsToRandomise) => {
 function App() {
   const [args, setArgs] = useState("");
   const [bingoEntries, setBingoEntries] = useState([]);
+  const [completed, setCompleted] = useState({});
 
   return (
     <div className="App">
       <header className="App-header">
-        <BingoWrapper><Bingo args={bingoEntries}></Bingo></BingoWrapper>
+        <BingoWrapper><Bingo args={bingoEntries} completed={completed} complete={(index) => setCompleted({...completed, [index]: true})}></Bingo></BingoWrapper>
         <ArgsWrapper>
           <Args value={args} onChange={(event) => setArgs(event.target.value)} placeholder="Enter newline separated values" ></Args>
-          <button onClick={() => setBingoEntries(randomiseArgs(args))}>Generate</button>
+          <button onClick={() => {
+            setBingoEntries(randomiseArgs(args));
+            setCompleted({});
+          }}>Generate</button>
         </ArgsWrapper>
       </header>
     </div>
