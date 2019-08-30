@@ -3,21 +3,45 @@ import './App.css';
 import Bingo from './bingo';
 import styled from 'styled-components';
 
+const Header = styled.header`
+  display: grid;
+  width: 100%;
+  height: 100%;
+  align-items: stretch;
+  justify-content: stretch;
+  grid-auto-rows: 1fr 1fr;
+  @media (min-aspect-ratio: 1/1) {
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr 1fr;
+  }
+`;
+
 const BingoWrapper = styled.div`
-  width: 50vw;
-  height: 50vw;
-  padding: 25px;
+  display: grid;
+  
+  @media (min-aspect-ratio: 1/1) {
+    margin: auto 0;
+    height: 50vw;
+  }
 `;
 
 const ArgsWrapper = styled.div`
-  width: 50vw;
-  height: 50vw;
-  padding: 25px;
+  @media (min-aspect-ratio: 1/1) {
+    margin: auto 0;
+    height: 50vw;
+  }
+  display: grid;
+  grid-auto-rows: 7fr 1fr;
+`;
+
+const GenerateButton = styled.button`
+  width: 200px;
+  margin: auto;
+  height: 50px;
 `;
 
 const Args = styled.textarea`
-  width: 100%;
-  height: 100%;
+  margin: 40px;
 `;
 
 const randomiseArgs = (argsToRandomise) => {
@@ -31,16 +55,16 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <BingoWrapper><Bingo args={bingoEntries} completed={completed} complete={(index) => setCompleted({...completed, [index]: true})}></Bingo></BingoWrapper>
+      <Header className="App-header">
+        <BingoWrapper><Bingo args={bingoEntries} completed={completed} complete={(index) => setCompleted({...completed, [index]: true})} needMore={args.length < 24}></Bingo></BingoWrapper>
         <ArgsWrapper>
           <Args value={args} onChange={(event) => setArgs(event.target.value)} placeholder="Enter newline separated values" ></Args>
-          <button onClick={() => {
+          <GenerateButton onClick={() => {
             setBingoEntries(randomiseArgs(args));
             setCompleted({});
-          }}>Generate</button>
+          }}>Generate</GenerateButton>
         </ArgsWrapper>
-      </header>
+      </Header>
     </div>
   );
 }
