@@ -1,0 +1,32 @@
+name: Deploy
+
+on:
+  push:
+    branches:    
+      - master 
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 12
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Build
+      run: |
+        cd bingo
+        yarn --frozen-lockfile --non-interactive
+        yarn build
+        yarn test
+      env:
+        CI: true
+    - name: Deploy
+      uses: contention/rsync-deployments@v1.0.0
+      secrets: ["DEPLOY_KEY"]
+      args: ["", "-a public/", "circleci@10people.co.uk:~/lab/"]
+
+    
