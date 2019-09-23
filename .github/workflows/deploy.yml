@@ -48,4 +48,4 @@ jobs:
     - name: Rsync switch
       run: rsync -a switch/build/ circleci@10people.co.uk:~/lab/switch
     - name: Deploy lab
-      run: ssh circleci@10people.co.uk sudo rsync -a ~/lab/ /root/server/nginx/data/lab
+      run: ssh circleci@10people.co.uk sudo rsync -a ~circleci/lab/ /root/server/nginx/data/lab
