@@ -26,7 +26,9 @@ jobs:
         CI: true
     - name: Deploy
       uses: contention/rsync-deployments@v1.0.0
-      secrets: ["DEPLOY_KEY"]
-      args: ["", "-a public/", "circleci@10people.co.uk:~/lab/"]
+      env:
+        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+      with:
+        args: "", "-a public/", "circleci@10people.co.uk:~/lab/"
 
     
