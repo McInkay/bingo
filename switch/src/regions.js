@@ -35,6 +35,6 @@ export const regions = {
         }),
         getNumHits: (data) => data.results[0].nbHits,
         reduce: (val) => val.results[0].hits,
-        map: (game) => ({title: game.title, price: game.salePrice, original: game.msrp, discount: ((game.msrp - game.salePrice) / game.msrp * 100).toFixed(2)})
+        map: (game) => ({title: game.title, price: game.salePrice, original: game.msrp, discount: (game.msrp - game.salePrice) / game.msrp * 100})
     }
 }

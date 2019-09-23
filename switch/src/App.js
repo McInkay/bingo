@@ -51,9 +51,9 @@ function App() {
         <tbody>
           {prices.length > 0 ? prices.map((entry) => (<tr key={entry.title}>
             <td>{entry.title}</td>
-            <td>{entry.price}</td>
-            <td>{entry.original}</td>
-            <td>{entry.discount}%</td>
+            <td>{entry.price.toFixed(2)}</td>
+            <td>{entry.original.toFixed(2)}</td>
+            <td>{Math.round(entry.discount)}%</td>
           </tr>)) : "Loading"}
         </tbody>
       </table>
