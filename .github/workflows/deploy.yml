@@ -29,6 +29,6 @@ jobs:
       env:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
       with:
-        args: "", "-a public/", "circleci@10people.co.uk:~/lab/"
+        args: '"", "-a public/", "circleci@10people.co.uk:~/lab/"'
 
     
