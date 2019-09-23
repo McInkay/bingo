@@ -26,8 +26,12 @@ jobs:
         yarn --frozen-lockfile --non-interactive
         yarn build
         yarn test
+        cd ..
       env:
         CI: true
+    - name: View dir
+      run: |
+        ls -la
     - name: Deploy Bingo
       uses: contention/rsync-deployments@v1.0.0
       env:
