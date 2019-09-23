@@ -6,7 +6,7 @@ on:
       - master 
 
 jobs:
-  build:
+  deploy:
 
     runs-on: ubuntu-latest
 
@@ -22,7 +22,7 @@ jobs:
         yarn --frozen-lockfile --non-interactive
         yarn build
         yarn test
-        cd switch
+        cd ../switch
         yarn --frozen-lockfile --non-interactive
         yarn build
         yarn test
@@ -34,7 +34,7 @@ jobs:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
       with:
         args: '"", "-a bingo/build/", "circleci@10people.co.uk:~/lab/bingo/"'
-    - name: Deploy Bingo
+    - name: Deploy Switch
       uses: contention/rsync-deployments@v1.0.0
       env:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
