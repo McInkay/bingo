@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Bingo from './bingo';
 import styled from 'styled-components';
@@ -48,8 +48,20 @@ const randomiseArgs = (argsToRandomise) => {
   return argsToRandomise.split("\n").filter((line) => line.trim() !== "").sort(() => Math.random() - 0.5); 
 }
 
+const usePersistedState = (localStorageKey) => {
+  const [value, setValue] = useState(
+    localStorage.getItem(localStorageKey) || ''
+  );
+
+  useEffect(() => {
+    localStorage.setItem(localStorageKey, value);
+  }, [value, localStorageKey]);
+
+  return [value, setValue];
+};
+
 function App() {
-  const [args, setArgs] = useState("");
+  const [args, setArgs] = usePersistedState('bingo.args');
   const [bingoEntries, setBingoEntries] = useState([]);
   const [completed, setCompleted] = useState({});
 
