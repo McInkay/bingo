@@ -35,8 +35,8 @@ const Completed = styled.div`
 function Bingo({args, completed, complete, needMore}) {
     let entries = [];
     if (args.length >= 24) {
-        entries = args.slice(0, 25);
-        entries.splice(12, 1,  "Free space");
+        entries = args.slice(0, 24);
+        entries.splice(12, 0,  "Free space");
     }
     return (
         <Wrapper>
