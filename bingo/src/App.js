@@ -56,7 +56,7 @@ function App() {
   return (
     <div className="App">
       <Header className="App-header">
-        <BingoWrapper><Bingo args={bingoEntries} completed={completed} complete={(index) => setCompleted({...completed, [index]: true})} needMore={args.split("\n").length < 24}></Bingo></BingoWrapper>
+        <BingoWrapper><Bingo args={bingoEntries} completed={completed} complete={(index) => setCompleted({...completed, [index]: true})} needMore={args.split("\n").filter((arg) => arg !== "").length < 24}></Bingo></BingoWrapper>
         <ArgsWrapper>
           <Args value={args} onChange={(event) => setArgs(event.target.value)} placeholder="Enter newline separated values" ></Args>
           <GenerateButton onClick={() => {
