@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
 import {regions, REGIONS} from './regions';
+import GameEntry from './GameEntry';
 
 const getData = async (regionKey) => {
   const prices = [];
@@ -30,7 +31,9 @@ function App() {
     setRegion(newRegion);
     setPrices([]);
   }
-  getData(region).then((newPrices) => newPrices.length !== prices.length && setPrices(newPrices));
+  if (prices.length === 0) {
+    getData(region).then((newPrices) => setPrices(newPrices));
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -43,18 +46,14 @@ function App() {
         <thead>
           <tr>
             <th>Title</th>
+            <th>Metacritic score</th>
             <th>Sale Price</th>
             <th>Normal Price</th>
             <th>Discount</th>
           </tr>
         </thead>
         <tbody>
-          {prices.length > 0 ? prices.map((entry) => (<tr key={entry.title}>
-            <td>{entry.title}</td>
-            <td>{entry.price.toFixed(2)}</td>
-            <td>{entry.original.toFixed(2)}</td>
-            <td>{Math.round(entry.discount)}%</td>
-          </tr>)) : "Loading"}
+          {prices.length > 0 ? prices.map((entry) => (<GameEntry entry={entry} key={entry.title}></GameEntry>)) : <tr><td>Loading</td></tr>}
         </tbody>
       </table>
     </div>
