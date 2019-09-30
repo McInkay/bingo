@@ -30,7 +30,7 @@ export const regions = {
         method: "GET",
         getNumHits: (data) => data.response.numFound,
         reduce: (val) => val.response.docs,
-        map: (game) => ({title: game.title, price: game.price_sorting_f, original: Math.round((game.price_sorting_f / (100 - game.price_discount_percentage_f) * 100)*100)/100, discount: game.price_discount_percentage_f})
+        map: (game) => ({title: game.title, url: `https://www.nintendo.co.uk${game.url}`, price: game.price_sorting_f, original: Math.round((game.price_sorting_f / (100 - game.price_discount_percentage_f) * 100)*100)/100, discount: game.price_discount_percentage_f})
     },
     [REGIONS.NA]: {
         fetch: (num, getUrl, method, getBody) => fetch(getUrl(num), {method, body: JSON.stringify(getBody(num))}).then((res) => res.json()),
