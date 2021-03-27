@@ -24,6 +24,15 @@ const handler = async function () {
         next += ` and ${collections[1].colour}`;
     }
 
+    fetch('https://api.pushbullet.com/v2/pushes', {
+      method: 'post',
+      body: JSON.stringify({
+        "type": "note",
+        "title": `Bin: ${next}`
+      }),
+      headers: { 'Content-Type': 'application/json', 'Access-Token':  $API_TOKEN },
+    })
+
     return {
       statusCode: 200,
       body: JSON.stringify({ next: next }),
