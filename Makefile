@@ -11,10 +11,14 @@ buildSwitch:
 	yarn --frozen-lockfile --non-interactive && \
 	yarn build
 
+buildFunc:
+	cd functions/bin && \
+	npm i
+
 copyBuilds:
 	mv bingo/build build/bingo
 	mv switch/build build/switch
 
-build: buildBingo buildSwitch copyBuilds
+build: buildFunc buildBingo buildSwitch copyBuilds
 
 .PHONY: build
