@@ -153,10 +153,21 @@ const videos = [
   "ze2eyRo-VTA"
 ];
 
+function millisToTimestamp(millis) {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return (
+    seconds == 60 ?
+    (minutes+1) + ":00" :
+    minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+  );
+}
+
+
 videos.forEach((video) => {
   YoutubeTranscript.default.fetchTranscript(video).then((arrayOfTranscript) => {
     const transcript = arrayOfTranscript.reduce((prev, curr) => {
-      return prev + curr.text + " "
+      return prev + `${curr.text} (${millisToTimestamp(curr.offset)} - ${millisToTimestamp(curr.offset + curr.duration)})\n`
     }, "");
     appendFile(`transcripts\\${video}.txt`, transcript, function (err) {
       if (err) throw err;
