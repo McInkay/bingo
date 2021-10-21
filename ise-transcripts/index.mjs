@@ -164,7 +164,7 @@ function millisToTimestamp(millis) {
 }
 
 async function fileExists(id) {
-  var pattern = RegExp(`\(${id}\).txt$`);
+  var pattern = RegExp(`\\(${id}\\).txt$`);
   return new Promise((res) => {
     readdir('.//transcripts', (err, files)=>{
       if(files.find((file)=>{return pattern.test(file)==true;})){
