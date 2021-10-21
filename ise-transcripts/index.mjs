@@ -162,5 +162,8 @@ videos.forEach((video) => {
       if (err) throw err;
       console.log(`Created ${video}`);
     });
+  }).catch((e) => {
+    console.log(`Error getting ${video}`)
+    console.log(e);
   });
 });
