@@ -1,5 +1,5 @@
 import YoutubeTranscript from 'youtube-transcript';
-import {appendFile} from 'fs';
+import { writeFile, readdir } from 'fs';
 
 const videos = [
   "-Bq7T9ng9dA",
@@ -163,18 +163,39 @@ function millisToTimestamp(millis) {
   );
 }
 
+async function fileExists(id) {
+  var pattern = RegExp(`\(${id}\).txt$`);
+  return new Promise((res) => {
+    readdir('.//transcripts', (err, files)=>{
+      if(files.find((file)=>{return pattern.test(file)==true;})){
+        console.log('file found');
+        res(true);
+      }
+      else{
+        console.log('file not found');
+        res(false);
+      }
+    });
+  })
+}
+
 
 videos.forEach((video) => {
-  YoutubeTranscript.default.fetchTranscript(video).then((arrayOfTranscript) => {
-    const transcript = arrayOfTranscript.reduce((prev, curr) => {
-      return prev + `${curr.text} (${millisToTimestamp(curr.offset)} - ${millisToTimestamp(curr.offset + curr.duration)})\n`
-    }, "");
-    appendFile(`transcripts\\${video}.txt`, transcript, function (err) {
-      if (err) throw err;
-      console.log(`Created ${video}`);
+  fileExists(video).then((fileExists) => {
+    if (fileExists) {
+      return;
+    }
+    YoutubeTranscript.default.fetchTranscript(video).then((arrayOfTranscript) => {
+      const transcript = arrayOfTranscript.reduce((prev, curr) => {
+        return prev + `${curr.text} (${millisToTimestamp(curr.offset)} - ${millisToTimestamp(curr.offset + curr.duration)})\n`
+      }, "");
+      writeFile(`transcripts\\${video}.txt`, transcript, function (err) {
+        if (err) throw err;
+        console.log(`Created ${video}`);
+      });
+    }).catch((e) => {
+      console.log(`Error getting ${video}`)
+      console.log(e);
     });
-  }).catch((e) => {
-    console.log(`Error getting ${video}`)
-    console.log(e);
   });
 });
