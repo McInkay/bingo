@@ -167,12 +167,11 @@ async function fileExists(id) {
   var pattern = RegExp(`\\(${id}\\).txt$`);
   return new Promise((res) => {
     readdir('.//transcripts', (err, files)=>{
-      if(files.find((file)=>{return pattern.test(file)==true;})){
-        console.log('file found');
+      if(files.find((file) => pattern.test(file))){
         res(true);
       }
       else{
-        console.log('file not found');
+        console.log(`File not found for episode: ${id}`);
         res(false);
       }
     });
