@@ -165,6 +165,8 @@ const videos = [
   "b0RfKtiHFsQ",
   "M4uWEsoOSYc",
   "pYrvMn38Dus",
+  "ol2Mi6S0fzE",
+  "7gr-DVK8XfA"
 ];
 
 function millisToTimestamp(millis) {
