@@ -35,3 +35,11 @@ jobs:
         cd ..
       env:
         CI: true
+    - name: Build Pokemon List
+      run: |
+        cd pokemon-list
+        npm i
+        npm run build
+        cd ..
+      env:
+        CI: true
