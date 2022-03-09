@@ -40,3 +40,8 @@ ul {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }
+
+ul div:hover {
+  background-color: #282c34;
+  color: white;
+}
