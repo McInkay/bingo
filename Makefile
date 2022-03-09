@@ -12,7 +12,7 @@ buildSwitch:
 	yarn build
 
 buildPokemonList:
-	cs pokemon-list && \
+	cd pokemon-list && \
 	npm i && \
 	npm run build
 
