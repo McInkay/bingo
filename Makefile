@@ -23,7 +23,7 @@ buildFunc:
 copyBuilds:
 	mv bingo/build build/bingo
 	mv switch/build build/switch
-	mv buildPokemonList/build build/buildPokemonList
+	mv pokemon-list/build build/pokemon-list
 
 build: buildFunc buildBingo buildSwitch buildPokemonList copyBuilds
 
