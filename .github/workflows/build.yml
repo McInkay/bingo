@@ -26,12 +26,11 @@ jobs:
         cd ..
       env:
         CI: true
-    - name: Build Switch
+    - name: Build Hunger Games
       run: |
-        cd switch
-        yarn --frozen-lockfile --non-interactive
-        yarn build
-        yarn test
+        cd hunger-games
+        npm i
+        npm run build
         cd ..
       env:
         CI: true
@@ -40,6 +39,15 @@ jobs:
         cd pokemon-list
         npm i
         npm run build
+        cd ..
+      env:
+        CI: true
+    - name: Build Switch
+      run: |
+        cd switch
+        yarn --frozen-lockfile --non-interactive
+        yarn build
+        yarn test
         cd ..
       env:
         CI: true
