@@ -27,8 +27,9 @@ buildSwitch:
 
 copyBuilds:
 	mv bingo/build build/bingo
-	mv switch/build build/switch
+	mv hunger-games/build build/hunger-games
 	mv pokemon-list/build build/pokemon-list
+	mv switch/build build/switch
 
 build: buildBingo buildFunctions buildHungerGames buildPokemonList buildSwitch copyBuilds
 
