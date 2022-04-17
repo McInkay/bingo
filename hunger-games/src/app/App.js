@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { useMachine } from '@xstate/react';
+
+import { hungerGamesMachine } from './state'
 
 const Header = styled.header`
   background-color: #282c34;
@@ -21,6 +24,8 @@ const Main = styled.main`
 `;
 
 function App() {
+  const [state, send] = useMachine(hungerGamesMachine);
+
   return (
     <div>
       <Header>
@@ -28,6 +33,14 @@ function App() {
       </Header>
       <Main>
         Welcome. To the Hunger Games.
+
+        State: {state.value}
+
+        <button onClick={() => send('SETUP')}>
+          {state.value === 'initial'
+            ? 'Click to setup'
+            : 'Setup! Click to go back to initial'}
+        </button>
       </Main>
     </div>
   );
