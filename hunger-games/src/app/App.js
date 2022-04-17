@@ -28,15 +28,25 @@ const Main = styled.main`
 function App() {
 	const [state, send] = useMachine(hungerGamesMachine);
 
+	const renderSwitch = (state) => {
+		let Component;
+		switch (state) {
+			case "initial":
+				Component = Initial;
+				break;
+			case "setup":
+				Component = Setup;
+				break;
+			default:
+				Component = Initial;
+		}
+		return <Component state={state} send={send}></Component>;
+	};
+
 	return (
 		<div>
 			<Header>Hunger Games Simulator</Header>
-			<Main>
-				{state.value === "initial" && (
-					<Initial state={state} send={send}></Initial>
-				)}
-				{state.value === "setup" && <Setup state={state} send={send}></Setup>}
-			</Main>
+			<Main>{renderSwitch(state.value)}</Main>
 		</div>
 	);
 }
