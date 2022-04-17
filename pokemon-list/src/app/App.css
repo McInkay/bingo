@@ -1,47 +1,47 @@
 .App {
-  text-align: center;
+	text-align: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
 }
 
 .App-header {
-  background-color: #282c34;
-  height: 5vh;
-  min-height: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+	background-color: #282c34;
+	height: 5vh;
+	min-height: 50px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 
 .App-link {
-  color: #61dafb;
+	color: #61dafb;
 }
 
 main {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: calc(95vh - 10px);
-  padding-top: 10px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	height: calc(95vh - 10px);
+	padding-top: 10px;
 }
 
 .list {
-  overflow: auto;
+	overflow: auto;
 }
 
 ul {
-  list-style-type: none;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+	list-style-type: none;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
 }
 
 ul div:hover {
-  background-color: #282c34;
-  color: white;
+	background-color: #282c34;
+	color: white;
 }
