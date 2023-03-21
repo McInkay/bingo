@@ -234,6 +234,9 @@ const videos = [
 	"a-0Rd1oy87c",
 	"6zSU8O1smwI",
 	"lMKqmbz7nts",
+	"UZzD8FSLlqc",
+	"WGjY6LPLUho",
+	"zGUYus27NdM",
 ];
 
 function millisToTimestamp(millis) {
@@ -274,14 +277,13 @@ videos.forEach((video) => {
 						)} - ${millisToTimestamp(curr.offset + curr.duration)})\n`
 					);
 				}, "");
-				writeFile(`transcripts\\${video}.txt`, transcript, function (err) {
+				writeFile(`transcripts/${video}.txt`, transcript, function (err) {
 					if (err) throw err;
 					console.log(`Created ${video}`);
 				});
 			})
 			.catch((e) => {
 				console.log(`Error getting ${video}`);
-				console.log(e);
 			});
 	});
 });
