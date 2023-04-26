@@ -12,7 +12,7 @@
 		"react-scripts": "5.0.1",
 		"styled-components": "5.3.10",
 		"web-vitals": "3.3.1",
-		"xstate": "4.37.1"
+		"xstate": "4.37.2"
 	},
 	"scripts": {
 		"start": "react-scripts start",
