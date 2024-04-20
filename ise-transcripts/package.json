@@ -3,6 +3,6 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"youtube-transcript": "1.1.0"
+		"youtube-transcript": "1.2.1"
 	}
 }
