@@ -1,4 +1,4 @@
-import YoutubeTranscript from "youtube-transcript";
+import { YoutubeTranscript } from "youtube-transcript";
 import { writeFile, readdir } from "fs";
 
 const videos = [
@@ -316,7 +316,6 @@ async function fileExists(id) {
 			if (files.find((file) => pattern.test(file))) {
 				res(true);
 			} else {
-				console.log(`File not found for episode: ${id}`);
 				res(false);
 			}
 		});
@@ -328,9 +327,12 @@ videos.forEach((video) => {
 		if (fileExists) {
 			return;
 		}
-		YoutubeTranscript.default
-			.fetchTranscript(video)
+		console.log(`File not found for episode: ${video}, attempting fetch`);
+		YoutubeTranscript.fetchTranscript(video)
 			.then((arrayOfTranscript) => {
+				if (!arrayOfTranscript) {
+					throw new Error("No transcript found");
+				}
 				const transcript = arrayOfTranscript.reduce((prev, curr) => {
 					return (
 						prev +
@@ -345,7 +347,12 @@ videos.forEach((video) => {
 				});
 			})
 			.catch((e) => {
-				console.log(`Error getting ${video}`);
+				console.log(
+					`Error fetching ${video}: ${e.message.replace(
+						/\[YoutubeTranscript\]\s/,
+						""
+					)}`
+				);
 			});
 	});
 });
